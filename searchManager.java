@@ -15,7 +15,8 @@ import java.sql.Array;
 import java.io.FileReader;
 
 public class searchManager extends generatorMain{
-    
+    ArrayList<String> line;
+    int wordNum;
 
     public searchManager(char[][] wordGrid, ArrayList<String> line) {
         menu(wordGrid, line);
@@ -124,7 +125,7 @@ public class searchManager extends generatorMain{
         Scanner in = new Scanner(System.in);
         System.out.println("How many words do you want to use?");
         System.out.println("maximum: 7");
-        int wordNum = in.nextInt();
+        wordNum = in.nextInt();
         
         String word;
         System.out.println("please enter words as prompted");
@@ -178,19 +179,27 @@ public class searchManager extends generatorMain{
     } // end printIt
 
     public void Solution(char[][] wordGrid, ArrayList<String> line) { 
-       for(int x = 0; x < line.size(); x++) {
-         //for(int y = 0; y < line; )
-       }
 
+        // use for loop to iterate through each word & each character
+
+       for(int x = 0; x < wordNum; x++) {
+        int leng = line.get(x).length();
+
+         for(int y = 0; y < leng; y++) {
+           //  wordGrid[][] = line.get(x).charAt(y);
+         
+    
         for (int i = 0; i < wordGrid.length; i++) { 
             for (int j = 0; j < wordGrid[i].length; j++) {
                 System.out.print('X');
-
+                wordGrid[i][j] = line.get(x).charAt(y);
                 if (j == 29) {
                 System.out.println('X');
                 }
-            }  
-        }
+               // System.out.println(wordGrid[i][j] = line.get(x).charAt(y));
+            }  }
+            
+        } }
         menuTwo(wordGrid, line);
     } // end Solution
 
