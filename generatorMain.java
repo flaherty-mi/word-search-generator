@@ -11,10 +11,11 @@ import java.util.ArrayList;
 public class generatorMain {
     public static void main(String[] args) throws FileNotFoundException  {
         
-        char[][] wordGrid = new char [15][30];
+        char[][] Grid = new char [15][30];
+        char[][] sol = new char [15][30];
         ArrayList<String> line = new ArrayList<>();
-        new Generator(wordGrid);
-        new searchManager(wordGrid, line);
+        new searchManager(Grid, sol, line);
+
 
     }
 }

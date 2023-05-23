@@ -17,27 +17,37 @@ import java.io.FileReader;
 public class searchManager extends generatorMain {
     ArrayList<String> line;
     int wordNum;
+    int x;
+    int y;
+    int i;
+    int j;
 
-    public searchManager(char[][] wordGrid, ArrayList<String> line) {
-        menu(wordGrid, line);
+    public searchManager(char[][] Grid, char[][] sol, ArrayList<String> line) {
+        menu(Grid, sol, line);
+
+        for (int i = 0; i < Grid.length; i++) {
+            for (int j = 0; j < Grid[i].length; j++) {
+        Grid[i][j] = '#';
+        sol[i][j] = '#';
+     }}
+
     }
 
-    public void choice(char[][] wordGrid,ArrayList<String> line )  {
+    // directs user from their menu choice to appropriate method
+    public void choice(char[][] Grid, char[][] sol, ArrayList<String> line )  {
         Scanner input = new Scanner(System.in);
         String choice = input.next();
     
         // go to whichever method is chosen
         switch (choice.toLowerCase()) {
-
         case "g": 
-            inputOrText(wordGrid, line);
+            inputOrText(Grid, sol, line);
         return;
-    
         case "p":
-            printIt(wordGrid, line);
+            printIt(Grid, sol, line);
         return;
         case "s":
-            Solution(wordGrid, line);
+            Solution(Grid, sol, line);
         return;
         case "q":
             System.exit(0);
@@ -47,7 +57,7 @@ public class searchManager extends generatorMain {
     } // end choice
 
     // which method type user wants for generating a word search
-    public void inputOrText(char[][] wordGrid, ArrayList<String> line) {
+    public void inputOrText(char[][] Grid, char[][] sol, ArrayList<String> line) {
 
         // user decide to use file or input words for word search themselves
         System.out.println("do you want to input words for a word search, or upload a text file? ");
@@ -61,16 +71,16 @@ public class searchManager extends generatorMain {
             // go to whichever method they choose
             switch (whichOne.toLowerCase()) {
                 case "t":
-                       createFile(wordGrid, line);
+                       createFile(Grid, sol, line);
                     return;
                 case "i":
-                       createInput(wordGrid, line);
+                       createInput(Grid, sol, line);
                     return;
             }
     }  // end inputOrText
 
     // use words from text file for word search
-    public void createFile(char[][] wordGrid, ArrayList<String> line)  {
+    public void createFile(char[][] Grid, char[][] sol, ArrayList<String> line)  {
         Scanner input = new Scanner(System.in);
         // get file name
         System.out.print("please enter an input file: ");
@@ -94,7 +104,7 @@ public class searchManager extends generatorMain {
             line.add(word);
            }
 
-        System.out.println("These are your words: ")
+        System.out.println("These are your words: ");
         System.out.println();
         System.out.println(line);
         System.out.println();
@@ -108,7 +118,7 @@ public class searchManager extends generatorMain {
         switch(pick.toLowerCase()) {
             case "r":
                 line.removeAll(line);
-                createFile(wordGrid, line);
+                createFile(Grid, sol, line);
             return;
             case "n":
                 System.out.println("word search creation comeplete!");
@@ -116,10 +126,10 @@ public class searchManager extends generatorMain {
                 "solution, choose from menu ");
                 System.out.println();
         }
-        menuTwo(wordGrid, line);  
+        menuTwo(Grid, sol, line);  
     } // end createFile
 
-    public void createInput(char[][] wordGrid, ArrayList<String> line) {
+    public void createInput(char[][] Grid, char[][] sol, ArrayList<String> line) {
         // if prompted again within same program use -> clear que for input
         line.removeAll(line);
 
@@ -157,7 +167,7 @@ public class searchManager extends generatorMain {
         switch(pick.toLowerCase()) {
             case "r":
                 line.removeAll(line);
-                createInput(wordGrid, line);
+                createInput(Grid, sol, line);
             return;
             case "n":
                 System.out.println("word search creation comeplete");
@@ -165,19 +175,71 @@ public class searchManager extends generatorMain {
                 "solution, choose from menu ");
                 System.out.println();
         }
-        menuTwo(wordGrid, line);
+        placement(Grid, sol, line);
     } // end createInput
 
-    // displays the word search 
-    public void printIt(char[][] wordGrid, ArrayList<String> line)  {
-        // should include randomizer for char letters outside arraylist
+    public void placement (char[][] Grid, char[][] sol, ArrayList<String> line) {
         
+        for(x = 0; x < wordNum; x++) {
+            int leng = line.get(x).length(); 
+             for(y = 0; y < leng; y++) { 
+                
+            Random rand = new Random();   
+            int rowBound = 15;
+            int columnBound = 30;
+
+            int row = rand.nextInt(rowBound);
+            int column = rand.nextInt(columnBound);
+            
+            switch (x) {
+                case  0:
+                Grid[row][column] = line.get(x).charAt(y);
+                sol[row][column] = line.get(x).charAt(y);
+                    break;
+                case 1:
+                Grid[row][column] = line.get(x).charAt(y);
+                sol[row][column] = line.get(x).charAt(y);
+                    break;
+                case 2:
+                Grid[row][column] = line.get(x).charAt(y);
+                sol[row][column] = line.get(x).charAt(y);
+                    break;
+                case 3:
+                Grid[row][column] = line.get(x).charAt(y);
+                sol[row][column] = line.get(x).charAt(y);
+                    break;
+                case 4:
+                Grid[row][column] = line.get(x).charAt(y);
+                sol[row][column] = line.get(x).charAt(y);
+                    break;
+                case 5:
+                Grid[row][column] = line.get(x).charAt(y);
+                sol[row][column] = line.get(x).charAt(y);
+                    break;
+                case 6:
+                Grid[row][column] = line.get(x).charAt(y);
+                sol[row][column] = line.get(x).charAt(y);
+                    break;
+                default: 
+                    break;
+            }
+                    // inputting words for spec placement
+                      //  System.out.println(Grid[i][j] = line.get(x).charAt(y));
+                  
+             } }
+        
+        menuTwo(Grid, sol, line);
+    }
+
+
+    // displays the word search 
+    public void printIt(char[][] Grid, char[][] sol, ArrayList<String> line)  {
         // for loops for printing wordGrid array
-        for (int i = 0; i < wordGrid.length; i++) {
-            for (int j = 0; j < wordGrid[i].length; j++) {
+        for (int i = 0; i < Grid.length; i++) {
+            for (int j = 0; j < Grid[i].length; j++) {
 
                 // fill & print array with randomized letters
-                String letters = "ABCDEFGHIJKLMNOP";
+                String letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                 Random r = new Random();
                 char c = letters.charAt(r.nextInt(letters.length()));
                 System.out.print(c);
@@ -188,47 +250,46 @@ public class searchManager extends generatorMain {
                 } 
             }  
         }
-        menuTwo(wordGrid, line);
+        placement(Grid, sol, line);
     } // end printIt
 
     // displays the solution for the word search w/ out randomized letters
-    public void Solution(char[][] wordGrid, ArrayList<String> line) { 
-
-        // for loop -> iterate through each word -> each char
-       for(int x = 0; x < wordNum; x++) {
-        int leng = line.get(x).length();
-
-         for(int y = 0; y < leng; y++) {
-           //  wordGrid[][] = line.get(x).charAt(y);
+    public void Solution(char[][] Grid, char[][] sol, ArrayList<String> line) { 
          
-        // for loops printing 'x' in order to just show words
-        for (int i = 0; i < wordGrid.length; i++) { 
-            for (int j = 0; j < wordGrid[i].length; j++) {
-                System.out.print('X');
-                wordGrid[i][j] = line.get(x).charAt(y);
-                if (j == 29) {
-                System.out.println('X');
-                }
-               // System.out.println(wordGrid[i][j] = line.get(x).charAt(y));
-            }  }
-            
-        } }
-        menuTwo(wordGrid, line);
+        // for loops printing '#' in order to just show words
+        for (i = 0; i < sol.length; i++) { 
+            for (j = 0; j < sol[i].length; j++) {
+                
+                 if (sol[i][j] != '#') {
+                    System.out.print(sol[i][j]); 
+                 }
+                 else {
+                    System.out.println('#');
+                 }
+
+                 if (j == 29 && sol[i][j] != '#') {
+                    System.out.print(sol[i][j]); 
+                 } // end if
+                 else {
+                    System.out.println('#');
+                 }
+          }  } // end for loop
+        menuTwo(Grid, sol, line);
     } // end Solution
 
     // menu - prints menu
-    public void menu(char[][] wordGrid, ArrayList<String> line)  {
+    public void menu(char[][] Grid, char[][] sol, ArrayList<String> line)  {
         System.out.println("welcome to the word search game!");
         System.out.println("select from options below");
         System.out.println("[g] generate a new word search");
         System.out.println("[p] print word search");
         System.out.println("[s] show the solution to the word search");
         System.out.println("[q] quit program");
-    choice(wordGrid, line);
+    choice(Grid, sol, line);
     } // end menu
 
     // second menu for re-prompting
-    public void menuTwo(char[][] wordGrid, ArrayList<String> line)  {
+    public void menuTwo(char[][] Grid, char[][] sol, ArrayList<String> line)  {
         System.out.println();
         System.out.println("would you like to do anything else?");
         System.out.println();
@@ -237,7 +298,7 @@ public class searchManager extends generatorMain {
         System.out.println("[p] print word search");
         System.out.println("[s] show the solution to the word search");
         System.out.println("[q] quit program");
-    choice(wordGrid, line);
+    choice(Grid, sol, line);
     } // end menuTwo
 
 } // end of class
