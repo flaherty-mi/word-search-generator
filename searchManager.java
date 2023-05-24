@@ -21,6 +21,7 @@ public class searchManager extends generatorMain {
     int y;
     int i;
     int j;
+    String word;
 
     public searchManager(char[][] Grid, char[][] sol, ArrayList<String> line) {
         menu(Grid, sol, line);
@@ -139,7 +140,6 @@ public class searchManager extends generatorMain {
         System.out.println("maximum: 7");
         wordNum = in.nextInt();
         
-        String word;
         System.out.println("please enter words as prompted");
 
             // prompt user for correct number of words chosen
@@ -178,11 +178,12 @@ public class searchManager extends generatorMain {
         placement(Grid, sol, line);
     } // end createInput
 
+    // filling the array with word & char at random coordinates
     public void placement (char[][] Grid, char[][] sol, ArrayList<String> line) {
         
         for(x = 0; x < wordNum; x++) {
             int leng = line.get(x).length(); 
-             for(y = 0; y < leng; y++) { 
+            for(y = 0; y < leng; y++) {
                 
             Random rand = new Random();   
             int rowBound = 15;
@@ -191,46 +192,15 @@ public class searchManager extends generatorMain {
             int row = rand.nextInt(rowBound);
             int column = rand.nextInt(columnBound);
             
-            switch (x) {
-                case  0:
                 Grid[row][column] = line.get(x).charAt(y);
-                sol[row][column] = line.get(x).charAt(y);
-                    break;
-                case 1:
-                Grid[row][column] = line.get(x).charAt(y);
-                sol[row][column] = line.get(x).charAt(y);
-                    break;
-                case 2:
-                Grid[row][column] = line.get(x).charAt(y);
-                sol[row][column] = line.get(x).charAt(y);
-                    break;
-                case 3:
-                Grid[row][column] = line.get(x).charAt(y);
-                sol[row][column] = line.get(x).charAt(y);
-                    break;
-                case 4:
-                Grid[row][column] = line.get(x).charAt(y);
-                sol[row][column] = line.get(x).charAt(y);
-                    break;
-                case 5:
-                Grid[row][column] = line.get(x).charAt(y);
-                sol[row][column] = line.get(x).charAt(y);
-                    break;
-                case 6:
-                Grid[row][column] = line.get(x).charAt(y);
-                sol[row][column] = line.get(x).charAt(y);
-                    break;
-                default: 
-                    break;
-            }
-                    // inputting words for spec placement
-                      //  System.out.println(Grid[i][j] = line.get(x).charAt(y));
+                    
+                  sol[row][column] = line.get(x).charAt(y);
+
                   
              } }
         
         menuTwo(Grid, sol, line);
     }
-
 
     // displays the word search 
     public void printIt(char[][] Grid, char[][] sol, ArrayList<String> line)  {
@@ -243,10 +213,16 @@ public class searchManager extends generatorMain {
                 Random r = new Random();
                 char c = letters.charAt(r.nextInt(letters.length()));
                 System.out.print(c);
-
+               if (Grid[i][j] != '#') {
+                  System.out.println(Grid[i][j]);
+                  }
                 // only print array size worth
                 if (j == 29) {
-                System.out.println(c);
+                    System.out.println(c);
+                        
+                 if (Grid[i][j] != '#' && j == 29) {
+                     System.out.print(Grid[i][j]);
+                     }   
                 } 
             }  
         }
@@ -260,19 +236,22 @@ public class searchManager extends generatorMain {
         for (i = 0; i < sol.length; i++) { 
             for (j = 0; j < sol[i].length; j++) {
                 
-                 if (sol[i][j] != '#') {
-                    System.out.print(sol[i][j]); 
-                 }
-                 else {
-                    System.out.println('#');
-                 }
+                   // System.out.println(sol);
 
-                 if (j == 29 && sol[i][j] != '#') {
+                    if (sol[i][j] != '#') {
+                        System.out.print(sol[i][j]); 
+                     }
+                     else{
+                        System.out.println('#');
+                     }
+                if (j == 29) { 
+                  if (j == 29 && sol[i][j] != '#') {
                     System.out.print(sol[i][j]); 
-                 } // end if
-                 else {
-                    System.out.println('#');
-                 }
+                    else {
+                        System.out.println('#');
+                    }
+                 } }// end if
+                
           }  } // end for loop
         menuTwo(Grid, sol, line);
     } // end Solution
