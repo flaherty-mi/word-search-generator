@@ -212,19 +212,12 @@ public class searchManager extends generatorMain {
                 String letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                 Random r = new Random();
                 char c = letters.charAt(r.nextInt(letters.length()));
+
                 System.out.print(c);
-               if (Grid[i][j] != '#') {
-                  System.out.println(Grid[i][j]);
-                  }
-                // only print array size worth
                 if (j == 29) {
                     System.out.println(c);
-                        
-                 if (Grid[i][j] != '#' && j == 29) {
-                     System.out.print(Grid[i][j]);
-                     }   
-                } 
-            }  
+                }   
+          } 
         }
         placement(Grid, sol, line);
     } // end printIt
@@ -235,24 +228,22 @@ public class searchManager extends generatorMain {
         // for loops printing '#' in order to just show words
         for (i = 0; i < sol.length; i++) { 
             for (j = 0; j < sol[i].length; j++) {
-                
-                   // System.out.println(sol);
 
                     if (sol[i][j] != '#') {
                         System.out.print(sol[i][j]); 
+                     } 
+                     else {
+                        System.out.print('#');
                      }
-                     else{
-                        System.out.println('#');
-                     }
-                if (j == 29) { 
-                  if (j == 29 && sol[i][j] != '#') {
-                    System.out.print(sol[i][j]); 
+                if (j == 29 && sol[i][j] != '#') {
+                    System.out.println(sol[i][j]); 
+                }
                     else {
                         System.out.println('#');
                     }
-                 } }// end if
+                  }// end if
                 
-          }  } // end for loop
+           } // end for loop
         menuTwo(Grid, sol, line);
     } // end Solution
 
